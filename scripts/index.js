@@ -7,18 +7,17 @@ const placesList = document.querySelector ('.places__list');
 // @todo: Функция создания карточки
 function createCard (name, link, deleteCard) {
     const placesItem = cardTemplate.querySelector('.places__item').cloneNode(true);
+    const itemImage = placesItem.querySelector('.card__image');
         placesItem.querySelector('.card__title').textContent = name;
-        placesItem.querySelector('.card__image').src = link;
-        placesList.append(placesItem);
+        itemImage.src = link;
+        itemImage.alt = ('на фото ' + name);
     const deleteButton = placesItem.querySelector('.card__delete-button');
-    deleteButton.addEventListener('click', deleteCard);
+    deleteButton.addEventListener('click', () => deleteCard(placesItem));
     return placesItem;
 };
 
 // @todo: Функция удаления карточки
-function deleteCard (evt) {
-    const eventTarget = evt.target;
-    const card = eventTarget.closest('.places__item');
+function deleteCard (card) {
     card.remove();
 };
 
